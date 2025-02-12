@@ -1,134 +1,118 @@
-import streamlit as st
-import yt_dlp
-import os
-from pathlib import Path
-import imageio_ffmpeg
+# ... [Keep all previous imports and backend code] ...
 
-# Create downloads directory if not exists
-Path("downloads").mkdir(exist_ok=True)
-
-def download_audio(url):
-    ydl_opts = {
-        'format': 'bestaudio/best',
-        'postprocessors': [{
-            'key': 'FFmpegExtractAudio',
-            'preferredcodec': 'mp3',
-            'preferredquality': '192',
-        }],
-        'outtmpl': 'downloads/%(title)s.%(ext)s',
-        'quiet': True,
-        'ffmpeg_location': imageio_ffmpeg.get_ffmpeg_exe(),
-    }
+# ========== Footer Pages Content ==========
+def show_legal_pages():
+    st.markdown("---")
     
-    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        info = ydl.extract_info(url, download=True)
-        filename = ydl.prepare_filename(info)
-        mp3_filename = os.path.splitext(filename)[0] + '.mp3'
-        return mp3_filename
+    # DMCA Page
+    with st.expander("DMCA Copyright Policy", expanded=False):
+        st.markdown("""
+        **soundcloudtomp3.pro DMCA Takedown Policy**
 
-# ========== Frontend Design ==========
-st.set_page_config(page_title="SoundCloud Downloader", layout="wide")
-
-# Header Navigation
-col1, col2, col3, col4 = st.columns(4)
-with col1:
-    st.markdown("[About Us](#about-us)")
-with col2:
-    st.markdown("[Blog](#blog)")
-with col3:
-    st.markdown("[Contact](#contact)")
-with col4:
-    st.markdown("[Language](#language)")
-
-st.markdown("---")
-
-# Main Title
-st.markdown("<h1 style='text-align: center; color: #ff5500;'>Soundcloud Downloader To Mp3 Tool</h1>", unsafe_allow_html=True)
-st.markdown("<h3 style='text-align: center; margin-top: -20px;'>Download Soundcloud Songs And Music To MP3 On PC And Mobile Quickly</h3>", unsafe_allow_html=True)
-
-# Main Converter Section
-with st.container():
-    st.subheader("🔗 SoundCloud Track Link")
-    url = st.text_input(" ", placeholder="Paste track URL here", label_visibility="collapsed")
+        We respect intellectual property rights and comply with the Digital Millennium Copyright Act (DMCA). 
+        To file a copyright infringement notification:
+        
+        1. Provide your contact information
+        2. Identify the copyrighted work
+        3. Include the URL of allegedly infringing content
+        4. State your good faith belief of unauthorized use
+        5. Include a statement under penalty of perjury
+        
+        Send notices to: dmca@soundcloudtomp3.pro  
+        Counter-notices must include similar information.
+        """)
     
-    col1, col2, col3 = st.columns([1,2,1])
-    with col2:
-        if st.button("🚀 Download MP3 Track", use_container_width=True):
-            if url:
-                try:
-                    with st.spinner('Downloading... This may take a moment'):
-                        mp3_path = download_audio(url)
-                        
-                        with open(mp3_path, "rb") as f:
-                            btn = st.download_button(
-                                label="💾 Save MP3 File",
-                                data=f,
-                                file_name=os.path.basename(mp3_path),
-                                mime="audio/mpeg",
-                                use_container_width=True
-                            )
-                        
-                        os.remove(mp3_path)
-                except Exception as e:
-                    st.error(f"Error downloading track: {str(e)}")
-            else:
-                st.warning("Please enter a SoundCloud track URL")
+    # Privacy Policy
+    with st.expander("Privacy Policy", expanded=False):
+        st.markdown("""
+        **soundcloudtomp3.pro Privacy Commitment**
+        
+        We collect minimal data necessary for service operation:
+        
+        - URLs submitted for conversion
+        - Temporary system logs (deleted after 24 hours)
+        - No personal information stored
+        
+        We use cookies only for essential functionality. We never sell data or share with third parties.
+        """)
+    
+    # Terms & Conditions
+    with st.expander("Terms & Conditions", expanded=False):
+        st.markdown("""
+        **soundcloudtomp3.pro Service Terms**
+        
+        By using our service, you agree:
+        
+        - You have rights to convert/download content
+        - Maximum 10 conversions per day per user
+        - No commercial use allowed
+        - We may terminate abusive accounts
+        - Service provided "as-is" without warranties
+        
+        Prohibited activities include reverse engineering, automated scraping, and redistribution of converted content.
+        """)
+    
+    # About Us
+    with st.expander("About Us", expanded=False):
+        st.markdown("""
+        **About soundcloudtomp3.pro**
+        
+        Established in 2023, we provide temporary audio conversion services for:
+        
+        - Personal backup purposes
+        - Content creators with original works
+        - Educational use cases
+        
+        Our mission is to enable fair use of audio content while respecting creators' rights.
+        """)
+    
+    # Contact Us
+    with st.expander("Contact Us", expanded=False):
+        st.markdown("""
+        **soundcloudtomp3.pro Support Channels**
+        
+        For general inquiries: support@soundcloudtomp3.pro  
+        Technical issues: tech@soundcloudtomp3.pro  
+        Legal matters: legal@soundcloudtomp3.pro  
+        
+        Office Address:  
+        SoundCloudToMP3 Ltd.  
+        Digital Media Hub,  
+        Tech Valley, CA 94016  
+        (Virtual office - no physical visits)
+        """)
 
-# How To Use Section
-st.markdown("---")
-st.header("🎯 How to Use Soundcloud Downloader to Convert Soundcloud to MP3?")
-steps = """
-1. **Copy Soundcloud track link** - Find your desired track on SoundCloud and copy its URL
-2. **Paste Soundcloud track link** - Insert the link in the input field above
-3. **Save Soundcloud MP3 track** - Click the download button and enjoy offline!
-"""
-st.markdown(steps)
-
-# Platform Guides
-col1, col2 = st.columns(2)
-with col1:
-    st.subheader("🖥️ PC Instructions")
+# ========== Updated Footer Section ==========
+def main_footer():
+    st.markdown("---")
     st.markdown("""
-    - Open SoundCloud in your browser
-    - Right-click on track → 'Copy link address'
-    - Paste here and click download
-    """)
+    <div style='text-align: center;'>
+        <div style='display: inline-block; margin: 0 10px;'>
+            <a href='#dmca' style='text-decoration: none; color: #666;'>DMCA</a> | 
+            <a href='#privacy' style='text-decoration: none; color: #666;'>Privacy Policy</a> | 
+            <a href='#terms' style='text-decoration: none; color: #666;'>T&C</a> | 
+            <a href='#about' style='text-decoration: none; color: #666;'>About Us</a> | 
+            <a href='#contact' style='text-decoration: none; color: #666;'>Contact</a>
+        </div>
+        <p style='font-size: 0.8em; margin-top: 20px;'>
+        © 2023 soundcloudtomp3.pro - All rights reserved<br>
+        Disclaimer: Third-party service for temporary conversions. Not affiliated with SoundCloud.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Hidden anchors for footer links
+    st.markdown("<div id='dmca'></div>", unsafe_allow_html=True)
+    st.markdown("<div id='privacy'></div>", unsafe_allow_html=True)
+    st.markdown("<div id='terms'></div>", unsafe_allow_html=True)
+    st.markdown("<div id='about'></div>", unsafe_allow_html=True)
+    st.markdown("<div id='contact'></div>", unsafe_allow_html=True)
 
-with col2:
-    st.subheader("📱 Mobile Instructions")
-    st.markdown("""
-    - Open SoundCloud app
-    - Share → Copy link
-    - Paste here and download
-    - Save to your device storage
-    """)
+# ========== Main App Flow ==========
+# ... [Keep previous header and main content] ...
 
-# FAQ Section
-st.markdown("---")
-st.header("❓ Soundcloud To Mp3 Downloader FAQ")
-with st.expander("What new updates will Soundcloud Downloader inserts this?"):
-    st.write("We regularly update our converter to maintain compatibility and add new features")
+# Show legal pages at bottom
+show_legal_pages()
 
-with st.expander("Is this service free?"):
-    st.write("Yes! Our SoundCloud downloader is completely free to use")
-
-with st.expander("Supported formats?"):
-    st.write("We currently support MP3 format with 192kbps quality")
-
-# Footer
-st.markdown("---")
-st.markdown("""
-<div style='text-align: center;'>
-    <p style='font-size: 0.8em;'>
-    **Disclaimer:** This tool is for educational purposes only. 
-    Please ensure you have the right to download and use any content.<br>
-    © 2023 SoundCloud Downloader Tool. All rights reserved.
-    </p>
-</div>
-""", unsafe_allow_html=True)
-
-# Hidden Section Anchors
-st.markdown("<div id='about-us'></div>", unsafe_allow_html=True)
-st.markdown("<div id='blog'></div>", unsafe_allow_html=True)
-st.markdown("<div id='contact'></div>", unsafe_allow_html=True)
-st.markdown("<div id='language'></div>", unsafe_allow_html=True)
+# Display footer
+main_footer()
