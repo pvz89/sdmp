@@ -1,65 +1,30 @@
-import streamlit as st
-import yt_dlp
-import os
-from pathlib import Path
-import imageio_ffmpeg
-
-# Create downloads directory if not exists
-Path("downloads").mkdir(exist_ok=True)
-
-def download_audio(url):
-    ydl_opts = {
-        'format': 'bestaudio/best',
-        'postprocessors': [{
-            'key': 'FFmpegExtractAudio',
-            'preferredcodec': 'mp3',
-            'preferredquality': '192',
-        }],
-        'outtmpl': 'downloads/%(title)s.%(ext)s',
-        'quiet': True,
-        'ffmpeg_location': imageio_ffmpeg.get_ffmpeg_exe(),
-    }
+# Main Converter Section
+with st.container():  # Line 53
+    # Properly indented content inside the 'with' block
+    st.subheader("🔗 SoundCloud Track Link")
+    url = st.text_input(" ", placeholder="Paste track URL here", label_visibility="collapsed")
     
-    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        info = ydl.extract_info(url, download=True)
-        filename = ydl.prepare_filename(info)
-        mp3_filename = os.path.splitext(filename)[0] + '.mp3'
-        return mp3_filename
-
-# ========== Legal Pages Content ==========
-def show_legal_pages():
-    st.markdown("---")
-    # DMCA Page
-    with st.expander("DMCA Copyright Policy", expanded=False):
-        st.markdown("""
-        **soundcloudtomp3.pro DMCA Takedown Policy**
-        [Content remains same as before]
-        """)
-    # Other pages remain same...
-
-def main_footer():
-    st.markdown("---")
-    # Footer content remains same...
-
-# ========== Main App UI ==========
-def main():
-    st.set_page_config(page_title="SoundCloud Downloader", layout="wide")
-    
-    # Header Navigation
-    col1, col2, col3, col4 = st.columns(4)
-    # ... [Header content remains same] ...
-    
-    # Main Converter Section
-    with st.container():
-        # ... [Main content remains same] ...
-    
-    # How To Use Section
-    st.markdown("---")
-    # ... [Rest of main content] ...
-    
-    # Show legal pages and footer
-    show_legal_pages()
-    main_footer()
-
-if __name__ == "__main__":
-    main()
+    col1, col2, col3 = st.columns([1,2,1])
+    with col2:
+        if st.button("🚀 Download MP3 Track", use_container_width=True):
+            if url:
+                try:
+                    with st.spinner('Downloading... This may take a moment'):
+                        mp3_path = download_audio(url)
+                        
+                        with open(mp3_path, "rb") as f:
+                            btn = st.download_button(
+                                label="💾 Save MP3 File",
+                                data=f,
+                                file_name=os.path.basename(mp3_path),
+                                mime="audio/mpeg",
+                                use_container_width=True
+                            )
+                        
+                        os.remove(mp3_path)
+                except Exception as e:
+                    st.error(f"Error downloading track: {str(e)}")
+            else:
+                st.warning("Please enter a SoundCloud track URL")
+    # Line 57 would be here
+    st.markdown("---")  # This should be properly aligned under the container
