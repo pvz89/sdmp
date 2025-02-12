@@ -2,6 +2,7 @@ import streamlit as st
 import yt_dlp
 import os
 from pathlib import Path
+import imageio_ffmpeg
 
 # Create downloads directory if not exists
 Path("downloads").mkdir(exist_ok=True)
@@ -16,6 +17,7 @@ def download_audio(url):
         }],
         'outtmpl': 'downloads/%(title)s.%(ext)s',
         'quiet': True,
+        'ffmpeg_location': imageio_ffmpeg.get_ffmpeg_exe(),
     }
     
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
