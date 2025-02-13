@@ -118,6 +118,17 @@ with st.expander("Supported formats?"):
 # Footer
 st.markdown("---")
 st.markdown("""
+<div style='text-align: center; margin-bottom: 20px;'>
+    <a href="#dmca" style="color: #ff5500; text-decoration: none; margin: 0 10px;">DMCA</a> •
+    <a href="#disclaimer" style="color: #ff5500; text-decoration: none; margin: 0 10px;">Disclaimer</a> •
+    <a href="#t&amp;c" style="color: #ff5500; text-decoration: none; margin: 0 10px;">T&C</a> •
+    <a href="#about-us" style="color: #ff5500; text-decoration: none; margin: 0 10px;">About Us</a> •
+    <a href="#contact" style="color: #ff5500; text-decoration: none; margin: 0 10px;">Contact Us</a> •
+    <a href="#privacy-policy" style="color: #ff5500; text-decoration: none; margin: 0 10px;">Privacy Policy</a>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("""
 <div style='text-align: center;'>
     <p style='font-size: 0.8em;'>
     **Disclaimer:** This tool is for educational purposes only. 
@@ -132,3 +143,7 @@ st.markdown("<div id='about-us'></div>", unsafe_allow_html=True)
 st.markdown("<div id='blog'></div>", unsafe_allow_html=True)
 st.markdown("<div id='contact'></div>", unsafe_allow_html=True)
 st.markdown("<div id='language'></div>", unsafe_allow_html=True)
+st.markdown("<div id='dmca'></div>", unsafe_allow_html=True)
+st.markdown("<div id='disclaimer'></div>", unsafe_allow_html=True)
+st.markdown("<div id='t&amp;c'></div>", unsafe_allow_html=True)
+st.markdown("<div id='privacy-policy'></div>", unsafe_allow_html=True)
