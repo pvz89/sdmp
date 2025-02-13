@@ -115,104 +115,6 @@ with st.expander("Is this service free?"):
 with st.expander("Supported formats?"):
     st.write("We currently support MP3 format with 192kbps quality")
 
-# Legal Pages Content
-st.markdown("---")
-st.markdown("<div id='dmca'></div>", unsafe_allow_html=True)
-st.header("📜 DMCA Compliance")
-st.markdown("""
-**Digital Millennium Copyright Act (DMCA) Notice**
-
-We respect intellectual property rights and comply with the DMCA. 
-If you believe your copyrighted work is being infringed:
-
-1. Submit a written notice containing:
-   - Identification of the copyrighted work
-   - URL of allegedly infringing content
-   - Your contact information
-   - Statement of good faith belief
-   - Verification under penalty of perjury
-
-2. Send to our designated agent:
-   Email: dmca@example.com  
-   Address: 123 Copyright Lane, Digital City
-
-We will respond to valid notices within 5 business days.
-""")
-
-st.markdown("---")
-st.markdown("<div id='disclaimer'></div>", unsafe_allow_html=True)
-st.header("⚠️ Legal Disclaimer")
-st.markdown("""
-**Important Notice:**
-
-1. This tool is provided for **educational purposes only**
-2. Users are solely responsible for verifying copyright status
-3. We do not host or store any copyrighted content
-4. Downloading unauthorized content may violate copyright laws
-5. We reserve the right to refuse service to any user
-
-By using this service, you agree to these terms and assume all liability.
-""")
-
-st.markdown("---")
-st.markdown("<div id='t&amp;c'></div>", unsafe_allow_html=True)
-st.header("📑 Terms & Conditions")
-st.markdown("""
-**Service Agreement:**
-
-1. Users must be 13+ years old
-2. Maximum 10 downloads per day
-3. No commercial use allowed
-4. We reserve right to modify terms without notice
-5. Service provided "as-is" without warranties
-
-Violation of terms may result in IP ban and legal action.
-""")
-
-st.markdown("---")
-st.markdown("<div id='privacy-policy'></div>", unsafe_allow_html=True)
-st.header("🔒 Privacy Policy")
-st.markdown("""
-**Data Handling:**
-
-1. We do not collect personal information
-2. Downloaded files are immediately deleted
-3. We use cookies for basic analytics
-4. Third-party links have separate policies
-5. Data retention: No user data stored
-
-We never share or sell any user information.
-""")
-
-# About & Contact Sections
-st.markdown("---")
-st.markdown("<div id='about-us'></div>", unsafe_allow_html=True)
-st.header("👥 About Us")
-st.markdown("""
-**Our Mission:**
-
-- Provide accessible audio tools
-- Promote ethical content use
-- Support independent creators
-- Innovate in digital media conversion
-
-Founded in 2023 by audio technology enthusiasts.
-""")
-
-st.markdown("---")
-st.markdown("<div id='contact'></div>", unsafe_allow_html=True)
-st.header("📩 Contact Us")
-st.markdown("""
-**Get in Touch:**
-
-- Support: support@example.com
-- Partnerships: partners@example.com
-- Office: 456 Tech Street, Digital City
-- Hours: Mon-Fri 9AM-5PM (GMT)
-
-We respond within 24 hours.
-""")
-
 # Footer
 st.markdown("---")
 st.markdown("""
@@ -235,3 +137,13 @@ st.markdown("""
     </p>
 </div>
 """, unsafe_allow_html=True)
+
+# Hidden Section Anchors
+st.markdown("<div id='about-us'></div>", unsafe_allow_html=True)
+st.markdown("<div id='blog'></div>", unsafe_allow_html=True)
+st.markdown("<div id='contact'></div>", unsafe_allow_html=True)
+st.markdown("<div id='language'></div>", unsafe_allow_html=True)
+st.markdown("<div id='dmca'></div>", unsafe_allow_html=True)
+st.markdown("<div id='disclaimer'></div>", unsafe_allow_html=True)
+st.markdown("<div id='t&amp;c'></div>", unsafe_allow_html=True)
+st.markdown("<div id='privacy-policy'></div>", unsafe_allow_html=True)
